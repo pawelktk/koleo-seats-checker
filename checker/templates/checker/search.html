@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h3 class="card-title mb-4">Wyszukaj połączenie</h3>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="start_station" class="form-label">Stacja początkowa</label>
+        <input
+          type="text"
+          class="form-control"
+          id="start_station"
+          name="start_station"
+          value="{{ initial.start_station }}"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="end_station" class="form-label">Stacja końcowa</label>
+        <input
+          type="text"
+          class="form-control"
+          id="end_station"
+          name="end_station"
+          value="{{ initial.end_station }}"
+          required
+        />
+      </div>
+      <div class="row">
+        <div class="col-md-8 mb-3">
+          <label for="date" class="form-label">Data</label>
+          <input
+            type="date"
+            class="form-control"
+            id="date"
+            name="date"
+            value="{{ initial.date }}"
+            required
+          />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="time" class="form-label">Godzina</label>
+          <input
+            type="time"
+            class="form-control"
+            id="time"
+            name="time"
+            value="{{ initial.time }}"
+            required
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Szukaj</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

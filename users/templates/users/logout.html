@@ -1,0 +1,8 @@
+{% extends "base.html" %} {% block content %}
+<div class="text-center">
+  <h2>Zostałeś wylogowany</h2>
+  <div class="mt-3">
+    <a href="{% url 'users:login' %}">Zaloguj się ponownie</a>
+  </div>
+</div>
+{% endblock content %}

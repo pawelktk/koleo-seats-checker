@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+<a href="{% url 'search_page' %}" class="btn btn-secondary mb-3"
+  >&larr; Nowe wyszukiwanie</a
+>
+<div class="card">
+  <div class="card-header">
+    Wyniki dla:
+    <strong>{{ search_params.start }}</strong> &rarr;
+    <strong>{{ search_params.end }}</strong> w dniu
+    <strong>{{ search_params.date }}</strong> od godz.
+    <strong>{{ search_params.time }}</strong>
+  </div>
+  <div class="card-body">
+    {% if connections %}
+    <ul class="list-group">
+      {% for conn in connections %}
+      <li class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">
+            {{ conn.train_brand }} {{ conn.train_nr }} - {{ conn.train_name }}
+          </h5>
+          <small
+            >Czas podróży: <strong>{{ conn.travel_time }}</strong></small
+          >
+        </div>
+        <p class="mb-1">
+          Odjazd: <strong>{{ conn.start_time }}</strong> | Przyjazd:
+          <strong>{{ conn.end_time }}</strong>
+        </p>
+        <div>
+          {% if conn.available_seats %}
+          <span class="badge bg-success"
+            >{{ conn.available_seats|length }} wolnych miejsc</span
+          >
+          <small class="text-muted">
+            {% for seat in conn.available_seats %} Wagon
+            <strong>{{ seat.carriage_nr }}</strong
+            >, M. <strong>{{ seat.seat_nr }}</strong
+            >{% if seat.special_compartment_type_id == 10 %} (Ciszy){% endif %};
+            {% endfor %}
+          </small>
+          {% else %}
+          <span class="badge bg-danger">Brak wolnych miejsc</span>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-center">Nie znaleziono połączeń dla podanych kryteriów.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

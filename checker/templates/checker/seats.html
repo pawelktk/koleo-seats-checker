@@ -1,0 +1,33 @@
+{% extends 'checker/base.html' %} {% block content %}
+<a href="javascript:history.back()" class="btn btn-secondary mb-3"
+  >&larr; Wróć do wyników</a
+>
+<div class="card">
+  <div class="card-header">
+    Dostępne miejsca dla połączenia {{ connection_id }}
+  </div>
+  <div class="card-body">
+    {% if seats is not None %} {% if seats %}
+    <ul class="list-group">
+      {% for seat in seats %}
+      <li class="list-group-item">
+        Wagon <strong>{{ seat.carriage_nr }}</strong
+        >, Miejsce <strong>{{ seat.seat_nr }}</strong>
+        {% if seat.special_compartment_type_id == 10 %}
+        <span class="badge bg-info">Wagon Ciszy</span>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-center">
+      Brak wolnych miejsc standardowych lub w wagonie ciszy.
+    </p>
+    {% endif %} {% else %}
+    <p class="alert alert-danger">
+      Wystąpił błąd podczas sprawdzania miejsc.
+    </p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

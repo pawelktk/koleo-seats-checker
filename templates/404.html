@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<div class="text-center mt-5">
+  <h1 class="display-1">404</h1>
+  <h2>Nie znaleziono strony</h2>
+  <p class="lead">Strona, której szukasz, mogła zostać usunięta lub jest tymczasowo niedostępna.</p>
+  <a href="{% url 'search_page' %}" class="btn btn-primary mt-3">Wróć na stronę główną</a>
+</div>
+{% endblock %}
